@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	$("body").scrollspy({target: "#menu", offset:130});
 	var owlMain = $('[data-item="slider-main"]');
 	
 	owlMain.owlCarousel({
@@ -18,20 +19,18 @@ $(document).ready(function() {
 		],
 	});
 	
-	$('a.smooth').click(function(){
+	$('a.smooth').click(function(e){
 		$('html, body').animate({
-			scrollTop: $( $.attr(this, 'href') ).offset().top
+			scrollTop: $( $.attr(this, 'href') ).offset().top - 38
 		}, 1000);
+		console.log(e.offsetX +'x'+ e.offsetY);
 		return false;
 	});
 	
 	
 	
 	
-	$('.header-lvl-2 .nav.navbar-nav li a').click(function() {
-		$('.header-lvl-2 .nav.navbar-nav li a').removeClass('active');
-		$(this).addClass('active');
-	});
+	
 	
 	var form = $('[data-form="send"]');
 	$(form).validator().on('submit', function (e) {
@@ -54,24 +53,24 @@ $(document).ready(function() {
 	ymaps.ready(init);
 	function init () {
 		myMap = new ymaps.Map('map', {
-			center: [55.770579, 37.6959459],
+			center: [55.709884, 37.5402883],
 			zoom: 12,
 			controls: []
 		}),
 		myMap.behaviors
 			.disable(['rightMouseButtonMagnifier' , 'scrollZoom'])
-			myPlacemark = new ymaps.Placemark([55.770579, 37.6559459], {
+			myPlacemark = new ymaps.Placemark([55.675884, 37.5402883], {
 				hintContent: [
-				''
+				'Улица Вавилова'
 			].join(''),
 				balloonContentBody: [
-				'<div class=\'map_holder\'><div class=\'map_header\'><p>Контакты</p><\/div><div class=\'map_address\'><div class=\'icon\'><\/div><p>г. Москва, м. Митино</p><\/div><div class=\'map_phone\'><div class=\'icon\'><\/div><p><strong>+ 7 965-242-97-42</strong></p><p><strong>+ 7 926-113-58-17</strong></p><\/div><div class=\'map_date\'><div class=\'icon\'><\/div><p>Пн-Пт с 09:00 до 18:00</p><\/div><div class=\'map_mail\'><div class=\'icon\'><\/div><p><a href="mailto:Topsales15@mail.ru">Topsales15@mail.ru</a></p><\/div><\/div>'
+				''
 			].join('')
 			}, {
-				iconLayout: 'default#image',
-				iconImageHref: 'assets/img/pick-map.png',
-				iconImageSize: [59, 87],
-				iconImageOffset: [-32, -87]
+				// iconLayout: 'default#image',
+				// iconImageHref: 'assets/img/pick-map.png',
+				// iconImageSize: [59, 87],
+				// iconImageOffset: [-32, -87]
 			});
 		myMap.geoObjects.add(myPlacemark);
 	}
@@ -81,6 +80,7 @@ $(document).ready(function() {
 function send(){
 	var form = $('[data-form="send"]');
 	form.ajaxForm(function() {
+		$('#call2').modal('hide');
 		$('#call').modal('hide');
 		$('#thx').modal('show');
 		$(form).resetForm();

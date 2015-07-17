@@ -3,8 +3,10 @@
 	left: 0;
 	width:100%;
 	z-index: 10;
+	transform:translateY(0px);
+	transition:@transition;
 	&.fix-header {
-		
+		transform:translateY(-62px);
 	}
 	&-lvl-1 {
 		background: #2c2926;
@@ -77,6 +79,12 @@
 					&:last-child {
 						&:after {
 							content: none;
+						}
+					}
+					&.active {
+						a {
+							background: 0 0;
+							border-color: #f89842;
 						}
 					}
 				}
